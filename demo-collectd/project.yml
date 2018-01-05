@@ -1,0 +1,20 @@
+files:
+  /etc/collectd/collectd.conf: |
+    Hostname "demo-collectd.localhost"
+    
+    LoadPlugin syslog
+    
+    <Plugin syslog>
+      LogLevel info
+    </Plugin>
+    
+    LoadPlugin cpu
+    LoadPlugin memory
+    LoadPlugin processes
+    
+    LoadPlugin write_prometheus
+    
+    <Plugin "write_prometheus">
+        Port "9103"
+    </Plugin>
+command: /etc/init.d/inetutils-syslogd start ; /etc/init.d/collectd start ; bash
