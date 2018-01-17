@@ -1,0 +1,3 @@
+publish:
+  - "9090:9090"
+command: /etc/init.d/prometheus start ; bash
