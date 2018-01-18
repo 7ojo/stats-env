@@ -1,0 +1,4 @@
+command: /setup/make-requests 
+
+volumes:
+  - ./make-requests:/setup/make-requests

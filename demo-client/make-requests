@@ -1,0 +1,18 @@
+#!/bin/bash
+
+while true
+do
+	first="$(( ( RANDOM % 2 ) ))";
+
+	if [ $first == 0 ]
+	then
+		resource=first-counter
+	else
+		resource=second-counter
+	fi
+
+	curl "demo-server.localhost:8080/$resource"; 
+
+	sleep $(bc -l <<< "$(( (( RANDOM % 500 ) + 50) )) / 1000");
+done
+
