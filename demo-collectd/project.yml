@@ -17,4 +17,15 @@ files:
     <Plugin "write_prometheus">
         Port "9103"
     </Plugin>
+    
+    LoadPlugin statsd
+    
+    <Plugin statsd>
+      Host "0.0.0.0"
+      Port "8125"
+    </Plugin>
+
 command: /etc/init.d/inetutils-syslogd start ; /etc/init.d/collectd start ; bash
+
+publish:
+  - "8125:8125/udp"
