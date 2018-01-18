@@ -1,3 +1,26 @@
 publish:
   - "9090:9090"
+
 command: /etc/init.d/prometheus start ; bash
+
+files:
+  /etc/prometheus/prometheus.yml: |
+    global:
+      scrape_interval:     15s
+      evaluation_interval: 15s
+      external_labels:
+          monitor: 'example'
+    scrape_configs:
+      - job_name: 'prometheus'
+        scrape_interval: 5s
+        scrape_timeout: 5s
+        static_configs:
+          - targets: ['localhost:9090']
+      - job_name: 'collectd'
+        scrape_interval: 5s
+        static_configs:
+          - targets: ['demo-collectd.localhost:9103']
+      - job_name: 'something'
+        scrape_interval: 5s
+        static_configs:
+          - targets: ['demo-server.localhost:8080']
